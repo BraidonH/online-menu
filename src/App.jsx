@@ -8,11 +8,10 @@ const allCategories = [
   ...new Set(menu.map((menuItem) => menuItem.category)),
 ];
 
-console.log(allCategories);
-
 function App() {
   const [menuItems, setMenuItems] = useState(menu);
   const [categories, setCategories] = useState(allCategories);
+  const [search, setSearch] = useState("");
 
   const filteredCategories = (category) => {
     return category === "all"
@@ -20,8 +19,19 @@ function App() {
       : setMenuItems(menu.filter((item) => item.category === category));
   };
 
+  const filteredSearch = menuItems.filter((item) => {
+    return item.title.includes(search);
+  });
+
   return (
     <main className="App">
+      <input
+        placeholder="search menu"
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+      />
       <section className="menu-section">
         <div className="title">
           <h2>our menu</h2>
@@ -30,7 +40,7 @@ function App() {
           categories={categories}
           filteredCategories={filteredCategories}
         />
-        <Menu items={menuItems} />
+        <Menu items={filteredSearch} />
       </section>
     </main>
   );
