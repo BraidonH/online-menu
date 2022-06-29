@@ -1,5 +1,6 @@
 html {
   background-color: rgba(210, 186, 121, 0.267);
+  overflow: hidden;
 }
 
 .menu-section {
